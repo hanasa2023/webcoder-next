@@ -3,7 +3,12 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 
 import './globals.css'
+
+import React from 'react'
+
 import { TopBar } from '@/components/topBar'
+import { SideBar } from '@/components/sidebar'
+import { TerminalPanel } from '@/components/terminal-panel'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -31,8 +36,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <TopBar />
-        {children}
+        <div className="flex flex-col w-full h-screen">
+          <TopBar />
+          <div className="flex w-full h-full">
+            <SideBar />
+            <div className="flex w-full h-full">
+              {children}
+              <div className="flex w-full h-40">
+                <TerminalPanel />
+              </div>
+            </div>
+          </div>
+        </div>
       </body>
     </html>
   )
